@@ -1,9 +1,15 @@
 #root {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* To create three columns */
+  grid-template-columns: 1fr 1fr 1fr 1fr; /* To create three columns */
   gap: 20px;
   padding: 20px;
   color: rgb(25, 3, 3);
+}
+
+body {
+  background-color: #dfd0d0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 40px;
 }
 
 #root div {
@@ -25,9 +31,4 @@ footer {
   margin-top: 40px;
   padding: 20px;
   background-color: #582929;
-}
-
-body {
-  background-color: #dfd0d0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
