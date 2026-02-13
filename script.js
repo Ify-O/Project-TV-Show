@@ -21,11 +21,11 @@ function makePageForEpisodes(episodeList) {
     episodeDiv.appendChild(title);
 
     // tto create images for each episodes
-    const image = document.createElement("img");
     if (episode.image) {
+      const image = document.createElement("img");
       image.src = episode.image.medium; // this sets the source of the image to the medium-sized image provided in the episode data
-    }
-    episodeDiv.appendChild(image);
+      episodeDiv.appendChild(image);
+    } // putting it in an if statement helps to avoid crash and error if there is no image provided for an episode. also it doesn't create an empty <img> tag when there is no image provided, which would look bad on the page.
 
     // to create a summary for each episode
     const summary = document.createElement("p");
