@@ -15,7 +15,7 @@ function makePageForEpisodes(episodeList) {
     const number = episode.number.toString().padStart(2, "0");
     const episodeCode = `S${season}E${number}`; // this creates a string in the format "SxxExx" where xx is the season and episode number
 
-    //tto create a title for each episode
+    //To create a title for each episode
     const title = document.createElement("h2");
     title.textContent = `${episodeCode} - ${episode.name}`;
     episodeDiv.appendChild(title);
