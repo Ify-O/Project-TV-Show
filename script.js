@@ -28,17 +28,23 @@ function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.innerHTML = "";
 
-  const controls = document.createElement("div");
-  controls.classList.add("controls");
+  // HEADER BOX
+  const headerBox = document.createElement("div");
+  headerBox.classList.add("header-box");
+  const mainTitle = document.createElement("h1");
+  mainTitle.textContent = "TV Show Project";
+  headerBox.appendChild(mainTitle);
+  rootElem.appendChild(headerBox);
+
+  // CONTROLS BOX
+  const controlsBox = document.createElement("div");
+  controlsBox.classList.add("controls-box");
 
   const searchInput = document.createElement("input");
   searchInput.type = "text";
   searchInput.placeholder = "Search episodes...";
-  searchInput.classList.add("search");
 
   const select = document.createElement("select");
-  select.classList.add("episode-select");
-
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.textContent = "Jump to an episode...";
@@ -46,13 +52,14 @@ function makePageForEpisodes(episodeList) {
 
   const resultsText = document.createElement("p");
   resultsText.classList.add("results-count");
+  resultsText.textContent = `${episodeList.length} episodes shown`;
 
-  controls.appendChild(searchInput);
-  controls.appendChild(select);
-  controls.appendChild(resultsText);
+  controlsBox.appendChild(searchInput);
+  controlsBox.appendChild(select);
+  controlsBox.appendChild(resultsText);
+  rootElem.appendChild(controlsBox);
 
-  rootElem.appendChild(controls);
-
+  // EPISODES GRID
   const episodesContainer = document.createElement("div");
   episodesContainer.classList.add("episodes-container");
   rootElem.appendChild(episodesContainer);
@@ -69,17 +76,12 @@ function makePageForEpisodes(episodeList) {
       const number = episode.number.toString().padStart(2, "0");
       const episodeCode = `S${season}E${number}`;
 
-      episodeDiv.id = episodeCode;
-
-      const option = document.createElement("option");
-      option.value = episodeCode;
-      option.textContent = `${episodeCode} - ${episode.name}`;
-      select.appendChild(option);
-
+      // Episode title box
       const title = document.createElement("h2");
       title.textContent = `${episodeCode} - ${episode.name}`;
       episodeDiv.appendChild(title);
 
+      // Image
       if (episode.image) {
         const image = document.createElement("img");
         image.src = episode.image.medium;
@@ -87,11 +89,19 @@ function makePageForEpisodes(episodeList) {
         episodeDiv.appendChild(image);
       }
 
+      // Summary
       const summary = document.createElement("p");
       summary.innerHTML = episode.summary || "";
       episodeDiv.appendChild(summary);
 
+      episodeDiv.id = episodeCode;
       episodesContainer.appendChild(episodeDiv);
+
+      // Add option to select
+      const option = document.createElement("option");
+      option.value = episodeCode;
+      option.textContent = `${episodeCode} - ${episode.name}`;
+      select.appendChild(option);
     });
 
     resultsText.textContent = `${list.length} episode(s) shown`;
@@ -100,34 +110,30 @@ function makePageForEpisodes(episodeList) {
   // Initial render
   renderEpisodes(episodeList);
 
-  // Search functionality
+  // SEARCH
   searchInput.addEventListener("input", function (e) {
     const term = e.target.value.trim().toLowerCase();
-
-    if (term === "") {
+    if (!term) {
       renderEpisodes(episodeList);
       return;
     }
-
     const filtered = episodeList.filter((ep) => {
-      const season = ep.season.toString().padStart(2, "0");
-      const number = ep.number.toString().padStart(2, "0");
-      const code = `s${season}e${number}`;
-
-      const nameMatch = ep.name.toLowerCase().includes(term);
-      const summaryMatch = (ep.summary || "").toLowerCase().includes(term);
-      const codeMatch = code.includes(term);
-
-      return nameMatch || summaryMatch || codeMatch;
+      const code = `s${ep.season.toString().padStart(2, "0")}e${ep.number
+        .toString()
+        .padStart(2, "0")}`;
+      return (
+        ep.name.toLowerCase().includes(term) ||
+        (ep.summary || "").toLowerCase().includes(term) ||
+        code.includes(term)
+      );
     });
-
     renderEpisodes(filtered);
   });
 
+  // SELECT
   select.addEventListener("change", function (e) {
     const code = e.target.value;
     if (!code) return;
-
     const target = document.getElementById(code);
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
