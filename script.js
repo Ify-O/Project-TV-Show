@@ -1,8 +1,30 @@
-//You can edit ALL of the code here
+// You can edit ALL of the code here
+let allEpisodes = [];
+
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+  const rootElem = document.getElementById("root");
+
+  // Show loading message
+  rootElem.textContent = "Loading episodes, please wait...";
+
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Network response was not OK");
+      }
+      return response.json();
+    })
+    .then(function (episodes) {
+      allEpisodes = episodes;
+      makePageForEpisodes(allEpisodes);
+    })
+    .catch(function () {
+      rootElem.textContent =
+        "Sorry, something went wrong while loading the episodes.";
+    });
 }
+
+window.onload = setup;
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
@@ -11,6 +33,7 @@ function makePageForEpisodes(episodeList) {
   const controls = document.createElement("div");
   controls.classList.add("controls");
 
+<<<<<<< HEAD
   const searchInput = document.createElement("input");
   searchInput.type = "text";
   searchInput.placeholder = "Search episodes...";
@@ -57,10 +80,22 @@ function renderEpisodes(list) {
     option.textContent = `${episodeCode} - ${episode.name}`;
     select.appendChild(option);
 
+=======
+  episodeList.forEach(function (episode) {
+    const episodeDiv = document.createElement("div");
+
+    // Format episode code
+    const season = episode.season.toString().padStart(2, "0");
+    const number = episode.number.toString().padStart(2, "0");
+    const episodeCode = `S${season}E${number}`;
+
+    // Episode title
+>>>>>>> 7942b16 (since i deleted the episodes.js i had to fetch from an API and changed codes tto work with the new requirements.)
     const title = document.createElement("h2");
     title.textContent = `${episodeCode} - ${episode.name}`;
     episodeDiv.appendChild(title);
 
+<<<<<<< HEAD
     if (episode.image) {
       const image = document.createElement("img");
       image.src = episode.image.medium;
@@ -70,6 +105,18 @@ function renderEpisodes(list) {
 
     const summary = document.createElement("p");
     summary.innerHTML = episode.summary || "";
+=======
+    // Episode image
+    if (episode.image) {
+      const image = document.createElement("img");
+      image.src = episode.image.medium;
+      episodeDiv.appendChild(image);
+    }
+
+    // Episode summary
+    const summary = document.createElement("p");
+    summary.innerHTML = episode.summary;
+>>>>>>> 7942b16 (since i deleted the episodes.js i had to fetch from an API and changed codes tto work with the new requirements.)
     episodeDiv.appendChild(summary);
 
     episodesContainer.appendChild(episodeDiv);
@@ -116,5 +163,3 @@ select.addEventListener("change", function (e) {
 });
 
 }
-
-window.onload = setup;
