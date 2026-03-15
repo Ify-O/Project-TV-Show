@@ -1,69 +1,194 @@
-#root {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.episodes-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.episodes-container h2 {
-  background: #6b2c2c;
-  color: white;
-  padding: 8px;
-  border-radius: 6px;
-  font-size: 1rem;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
+/* General page setup */
 body {
   background-color: #dfd0d0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 40px;
+  margin: 0;
+  padding: 20px;
 }
 
-#root div {
-  border: 1px solid #340909;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f9e0e0;
-}
-
+/* Page title/logo */
 .main-title {
   text-align: center;
   font-size: 2.5rem;
-  background: #4a1f1f;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
+  color: #582929; /* distinct color */
   margin-bottom: 30px;
-  letter-spacing: 2px;
 }
 
+/* Controls container */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Search input and select */
+.controls input,
+.controls select {
+  padding: 8px 12px;
+  font-size: 1rem;
+  flex: 0 1 200px;  /* minimum width 200px, grows only slightly */
+  max-width: 250px;
+  box-sizing: border-box;
+}
+
+/* Episode container grid */
+.episodes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* responsive: 250px min, stretch to fill */
+  gap: 20px;
+}
+
+/* Each episode box */
+.episodes-container div {
+  border: 1px solid #340909;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Episode title box */
+.episodes-container h2 {
+  font-size: 1rem;
+  text-align: center;
+  background-color: #582929;
+  color: #fff;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Episode images */
+.episodes-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Episode summary */
+.episodes-container p {
+  font-size: 0.9rem;
+  text-align: justify;
+  color: #250000;
+}
+
+/* Footer */
 footer {
   text-align: center;
   margin-top: 40px;
   padding: 20px;
   background-color: #582929;
+  color: #fff;
 }
 
-.controls {
-  grid-column: 1 / -1;
-  display: flex;
-  gap: 15px;
+/* General body */
+body {
+  background-color: #dfd0d0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Header box */
+.header-box {
+  text-align: center;
+  background-color: #582929;
+  color: #fff;
+  padding: 20px 10px;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 
-.search {
-  padding: 8px;
-  font-size: 1rem;
+.header-box h1 {
+  margin: 0;
+  font-size: 2.5rem;
 }
 
-.episode-select {
-  padding: 8px;
+/* Controls box */
+.controls-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1cfcf;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.controls-box input,
+.controls-box select {
+  padding: 8px 12px;
+  font-size: 1rem;
+  flex: 0 1 200px;
+  max-width: 250px;
+  box-sizing: border-box;
+}
+
+.results-count {
+  font-size: 1rem;
+  color: #250000;
+  margin-left: 10px;
+}
+
+/* Episodes grid */
+.episodes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Each episode box */
+.episodes-container div {
+  border: 1px solid #340909;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Episode title box */
+.episodes-container h2 {
+  font-size: 1rem;
+  text-align: center;
+  background-color: #582929;
+  color: #fff;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Episode images */
+.episodes-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Episode summary */
+.episodes-container p {
+  font-size: 0.9rem;
+  text-align: justify;
+  color: #250000;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #582929;
+  color: #fff;
 }
