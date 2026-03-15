@@ -28,7 +28,6 @@ function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.innerHTML = "";
 
-  // Controls (Search + Selector)
   const controls = document.createElement("div");
   controls.classList.add("controls");
 
@@ -125,7 +124,6 @@ function makePageForEpisodes(episodeList) {
     renderEpisodes(filtered);
   });
 
-  // Episode selector
   select.addEventListener("change", function (e) {
     const code = e.target.value;
     if (!code) return;
